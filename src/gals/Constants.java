@@ -5,13 +5,15 @@ public interface Constants extends ScannerConstants, ParserConstants
     int EPSILON  = 0;
     int DOLLAR   = 1;
 
-    int t_INTEIRO = 2;
-    int t_VAR = 3;
-    int t_MAIS = 4;
-    int t_MENOS = 5;
-    int t_VEZES = 6;
-    int t_DIVIDE = 7;
-    int t_ABRE = 8;
-    int t_FECHA = 9;
+    int t_VALOR_INT = 2;
+    int t_SOMA = 3;
+    int t_SUB = 4;
+    int t_MULT = 5;
+    int t_DIV = 6;
+    int t_AP = 7;
+    int t_FP = 8;
+    int t_SHOW = 9;
+    int t_VAR = 10;
+    int t_IGUAL = 11;
 
 }
