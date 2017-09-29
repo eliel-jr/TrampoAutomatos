@@ -28,14 +28,25 @@ MULT: {aster}
 DIV: {barra}
 AP: {abre}
 FP: {fecha}
+SHOW: "cout"
 VAR:{variaveis}
+IGUAL: "="
+
 #NonTerminals
+<commands>
+<command>
+<atrib>
+<show>
 <A>
 <B>
 <C>
 <D>
 #Grammar
+<commands> ::= <commands><command> | <command>;
+<command> ::= <atrib> | <show>;
+<atrib> ::= VAR IGUAL <A>;
+<show> ::= SHOW <A>;
 <A> ::= <A> SOMA <B> #4 | <A> SUB <B> | <B>;
 <B> ::= <B> MULT <C> #5 | <B> DIV <C> | <C>;
 <C> ::= SUB <C> | <D>;
-<D> ::= AP <A> FP | VALOR_INT #2  | VALOR_FLOAT #3 | VAR #1;
+<D> ::= AP <A> FP | VALOR_INT #2 | VAR #1;
