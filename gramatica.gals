@@ -8,7 +8,7 @@ SemanticName = Semantico
 Package = gals
 ScannerCaseSensitive = true
 ScannerTable = Full
-Input = String
+Input = Stream
 Parser = SLR
 #RegularDefinitions
 ignorar: [\ \n\t\r\s]+
@@ -48,12 +48,13 @@ FIM: {fim}
 <C>
 <D>
 #Grammar
-<commands> ::= <commands><command> | <command>;
+<commands> ::= <commands><command> FIM | <command> FIM;
 <command> ::= <atrib> | <show>;
-<atrib> ::= VAR IGUAL <A> FIM;
-<show> ::= SHOW <A> FIM #8;
+<atrib> ::= VAR #10 IGUAL <A> #9;
+<show> ::= SHOW <A> #8;
 <A> ::= <A> SOMA <B> #3 | <A> SUB <B> #4 | <B>;
-<B> ::= <B> MULT <C> #5 | <B> DIV <C> #6 | <B> POT <C> #7 | <C>;
-<C> ::= AP <A> FP | VALOR_INT #2 | VAR #1 ;
+<B> ::= <B> MULT <C> #5 | <B> DIV <C> #6 | <C>;
+<C> ::= <C> POT <D> #7 | <D>;
+<D> ::= AP <A> FP | VALOR_INT #2 | VAR #1 ;
 
 

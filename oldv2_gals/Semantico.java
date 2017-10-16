@@ -53,11 +53,10 @@ public class Semantico implements Constants
                 System.out.println(Integer.toBinaryString(a));
                 break;
             case 9:
-                CompiladorTeste.mapa.put(tempVar, CompiladorTeste.pilha.pop());
-                tempVar = "";
+                tempVar = token.getLexeme();
                 break;
             case 10:
-                tempVar = token.getLexeme();
+                CompiladorTeste.mapa.put(tempVar, CompiladorTeste.pilha.pop());
                 break;
         }
     }	

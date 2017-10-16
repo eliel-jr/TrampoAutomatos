@@ -11,8 +11,10 @@ import gals.SemanticError;
 import gals.Semantico;
 import gals.Sintatico;
 import gals.SyntaticError;
+import java.util.HashMap;
 import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.Stack;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,14 +23,15 @@ import java.util.logging.Logger;
  * @author santiago
  */
 public class CompiladorTeste {
-    public static Queue<Integer> fila = new PriorityQueue<Integer>();
+    public static Stack<Integer> pilha = new Stack<Integer>();
+    public static HashMap<String, Integer> mapa = new HashMap<String, Integer>();
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         try {
             // TODO code application logic here
-            Lexico lex = new Lexico("A = 10;"+"B = 11;"+"B = 111 + A * B;"+"cout(B);");            
+            Lexico lex = new Lexico("A = 10 + 11;"+"B = 11 + 100;"+"C = 11;"+"B = 111 + A * B;"+"B= B + C;"+"cout(B);");            
             Sintatico sin = new Sintatico();
             Semantico sem = new Semantico();
             sin.parse(lex, sem);            
