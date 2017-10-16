@@ -11,33 +11,28 @@ import gals.SemanticError;
 import gals.Semantico;
 import gals.Sintatico;
 import gals.SyntaticError;
-import java.util.Stack;
+import java.util.PriorityQueue;
+import java.util.Queue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.sound.midi.SysexMessage;
 
 /**
  *
  * @author santiago
  */
 public class CompiladorTeste {
-    public static Stack<Double> pilha = new Stack<Double>();
+    public static Queue<Integer> fila = new PriorityQueue<Integer>();
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         try {
             // TODO code application logic here
-            Lexico lex = new Lexico("(3+3)*5");
+            Lexico lex = new Lexico("A = 10;"+"B = 11;"+"B = 111 + A * B;"+"cout(B);");            
             Sintatico sin = new Sintatico();
             Semantico sem = new Semantico();
-            sin.parse(lex, sem);
-            System.out.println("Resultado: "+pilha.pop());
-        } catch (LexicalError ex) {
-            Logger.getLogger(CompiladorTeste.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SyntaticError ex) {
-            Logger.getLogger(CompiladorTeste.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SemanticError ex) {
+            sin.parse(lex, sem);            
+        } catch (LexicalError | SyntaticError | SemanticError ex) {
             Logger.getLogger(CompiladorTeste.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

@@ -5,9 +5,10 @@ Language = Java
 ScannerName = Lexico
 ParserName = Sintatico
 SemanticName = Semantico
+Package = gals
 ScannerCaseSensitive = true
 ScannerTable = Full
-Input = Stream
+Input = String
 Parser = SLR
 #RegularDefinitions
 ignorar: [\ \n\t\r\s]+
@@ -16,9 +17,11 @@ mais: \+
 menos: \-
 aster: \*
 barra: /
+exp: \^
 abre: \(
 fecha: \)
-variaveis: [a-z]+
+variaveis: [a-zA-Z]+
+fim: ;
 #Tokens
 :{ignorar}
 VALOR_INT:{inteiro}
@@ -26,11 +29,14 @@ SOMA: {mais}
 SUB: {menos}
 MULT: {aster}
 DIV: {barra}
+POT: {exp}
 AP: {abre}
 FP: {fecha}
 SHOW: "cout"
 VAR:{variaveis}
 IGUAL: "="
+FIM: {fim}
+
 
 #NonTerminals
 <commands>
@@ -44,9 +50,10 @@ IGUAL: "="
 #Grammar
 <commands> ::= <commands><command> | <command>;
 <command> ::= <atrib> | <show>;
-<atrib> ::= VAR IGUAL <A>;
-<show> ::= SHOW <A>;
-<A> ::= <A> SOMA <B> #4 | <A> SUB <B> | <B>;
-<B> ::= <B> MULT <C> #5 | <B> DIV <C> | <C>;
-<C> ::= SUB <C> | <D>;
-<D> ::= AP <A> FP | VALOR_INT #2 | VAR #1;
+<atrib> ::= VAR IGUAL <A> FIM;
+<show> ::= SHOW <A> FIM #8;
+<A> ::= <A> SOMA <B> #3 | <A> SUB <B> #4 | <B>;
+<B> ::= <B> MULT <C> #5 | <B> DIV <C> #6 | <B> POT <C> #7 | <C>;
+<C> ::= AP <A> FP | VALOR_INT #2 | VAR #1 ;
+
+
